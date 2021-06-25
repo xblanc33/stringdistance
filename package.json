@@ -1,0 +1,23 @@
+{
+  "name": "stringdistance",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xblanc33/stringdistance.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xblanc33/stringdistance/issues"
+  },
+  "homepage": "https://github.com/xblanc33/stringdistance#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "mocha": "^9.0.1"
+  }
+}
