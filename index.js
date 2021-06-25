@@ -22,7 +22,6 @@ function asymetricDistance(fromVector, toVector) {
         sum += Math.pow(fromVector.get(k) - v,2);
     });
     return Math.sqrt(sum);
-
 }
 
 module.exports = {tokenize, vectorize, asymetricDistance};
