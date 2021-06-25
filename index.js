@@ -16,4 +16,13 @@ function vectorize(inputString) {
     }, new Map());
 }
 
-module.exports = {tokenize, vectorize};
+function asymetricDistance(fromVector, toVector) {
+    let sum = 0;
+    toVector.forEach((k,v) => {
+        sum += Math.pow(fromVector.get(k) - v,2);
+    });
+    return Math.sqrt(sum);
+
+}
+
+module.exports = {tokenize, vectorize, asymetricDistance};
