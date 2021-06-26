@@ -16,6 +16,19 @@ function vectorize(inputString) {
     }, new Map());
 }
 
+function addWeightedVectors(weightedVectors) {
+    const sum = new Map();
+    weightedVectors.forEach((weightedVector) => {
+        const weight = weightedVector.weight;
+        const vector = weightedVector.vector;
+        weightedVector.forEach((value,key) => {
+            let valueInSum = sum.get(key) ?? 0;
+            sum.set(key) = valueInSum + value * weight;
+        })
+    })
+    return sum;
+}
+
 function asymetricDistance(fromVector, baseVector) {
     let sum = 0;
     baseVector.forEach((value,key) => {
