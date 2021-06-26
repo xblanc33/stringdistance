@@ -8,13 +8,19 @@
 
 ## Create Tokens
 
-    const tokenize = require('../index.js').tokenize;
+    const tokenize = require('index.js').tokenize;
     tokenize('lorem ...');
 
 
 ## Create Vector
 
-    const vectorize = require('../index.js').vectorize;
+    const vectorize = require('index.js').vectorize;
     vectorize('lorem ...');
 
-## Compute Distance
+## Compute Asymetric Distance
+
+    const vectorize = require('index.js').vectorize;
+    const asymetricDistance = require('index.js').asymetricDistance;
+    const baseV = vectorize('lorem ...');
+    const fromT = vectorize('lorem ...');
+    const distance = asymetricDistance(fromV, baseV);

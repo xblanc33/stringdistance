@@ -16,10 +16,11 @@ function vectorize(inputString) {
     }, new Map());
 }
 
-function asymetricDistance(fromVector, toVector) {
+function asymetricDistance(fromVector, baseVector) {
     let sum = 0;
-    toVector.forEach((k,v) => {
-        sum += Math.pow(fromVector.get(k) - v,2);
+    baseVector.forEach((value,key) => {
+        const fromPosition = fromVector.get(key) ?? 0;
+        sum += Math.pow(Math.abs(fromPosition - value),2);
     });
     return Math.sqrt(sum);
 }
