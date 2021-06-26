@@ -21,7 +21,7 @@ function addWeightedVectors(weightedVectors) {
     weightedVectors.forEach((weightedVector) => {
         const weight = weightedVector.weight;
         const vector = weightedVector.vector;
-        weightedVector.forEach((value,key) => {
+        vector.forEach((value,key) => {
             let valueInSum = sum.get(key) ?? 0;
             sum.set(key) = valueInSum + value * weight;
         })
