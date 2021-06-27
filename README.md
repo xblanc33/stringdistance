@@ -26,6 +26,15 @@
     const distance = asymetricDistance(fromV, baseV);
 
 
+## Compute Coverage 
+
+    const vectorize = require('index.js').vectorize;
+    const asymetricCoverage = require('index.js').asymetricCoverage;
+    const baseV = vectorize('lorem ...');
+    const fromT = vectorize('lorem ...');
+    const coverage = asymetricCoverage(fromV, baseV);
+
+
 ## Weight in Vector
 
     const vector1 = vectorize("a,b");
@@ -37,7 +46,7 @@
     assert.strictEqual(vector.get('c'), 2);
     assert.strictEqual(vector.get('d'), 2);
 
-## Sort Practices
+## Sort Practices according to asymetric distance
 
     const practicesVector = PRACTICES.map((practices) => {
         const nameVector = vectorize(practices.name);
@@ -56,3 +65,24 @@
     })
     console.log(closestPractice.name);
     console.log(distance);
+
+
+## Sort Practices according to asymetric coverage
+
+    const practicesVector = PRACTICES.map((practices) => {
+        const nameVector = vectorize(practices.name);
+        const descVector = vectorize(practices.description);
+        return addWeightedVectors([{vector: nameVector, weight:10}, {vector: descVector, weight:1}])
+    })
+    const codeVector = vectorize(CODE);
+    let closestPractice;
+    let coverage = 0;
+    practicesVector.forEach((practiceVector,i) => {
+        const practiceCoverage = asymetricCoverage(codeVector, practiceVector);
+        if (practiceCoverage > coverage) {
+            coverage = practiceCoverage;
+            closestPractice = PRACTICES[i];
+        }
+    })
+    console.log(closestPractice.name);
+    console.log(coverage);
