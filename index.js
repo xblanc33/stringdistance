@@ -1,4 +1,5 @@
-const TOKEN_DELIMITERS = /[^A-Z]/i;
+//const TOKEN_DELIMITERS = /[^A-Z]/i;
+const TOKEN_DELIMITERS = /[^A-Za-zÀ-ÖØ-öø-ÿ]/;
 const BLACK_LIST = [
     "should"
 ]
@@ -6,6 +7,7 @@ const BLACK_LIST = [
 function tokenize(inputString) {
     return inputString.split(TOKEN_DELIMITERS)
     .filter((token)=>token != "")
+    .map((token) => token.toLowerCase())
     .filter((token) => !BLACK_LIST.includes(token))
     .sort();
 }
@@ -29,7 +31,7 @@ function addWeightedVectors(weightedVectors) {
         const vector = weightedVector.vector;
         vector.forEach((value,key) => {
             let valueInSum = sum.get(key) ?? 0;
-            sum.set(key) = valueInSum + value * weight;
+            sum.set(key, valueInSum + value * weight);
         })
     })
     return sum;
@@ -44,4 +46,4 @@ function asymetricDistance(fromVector, baseVector) {
     return Math.sqrt(sum);
 }
 
-module.exports = {tokenize, vectorize, asymetricDistance};
+module.exports = {tokenize, vectorize, asymetricDistance, addWeightedVectors};
