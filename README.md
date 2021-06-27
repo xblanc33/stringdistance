@@ -26,7 +26,7 @@
     const distance = asymetricDistance(fromV, baseV);
 
 
-## Weight in Vector Distance
+## Weight in Vector
 
     const vector1 = vectorize("a,b");
     const vector2 = vectorize("b c d");
