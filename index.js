@@ -31,10 +31,12 @@ function addWeightedVectors(weightedVectors) {
     weightedVectors.forEach((weightedVector) => {
         const weight = weightedVector.weight;
         const vector = weightedVector.vector;
-        vector.forEach((value,key) => {
-            let valueInSum = sum.get(key) ?? 0;
-            sum.set(key, valueInSum + value * weight);
-        })
+        if (weight !== undefined && weight !== 0 &&  vector !== undefined) {
+            vector.forEach((value,key) => {
+                let valueInSum = sum.get(key) ?? 0;
+                sum.set(key, valueInSum + value * weight);
+            })
+        }
     })
     return sum;
 }
@@ -52,11 +54,17 @@ function asymetricCoverage(fromVector, baseVector) {
     let fromCoverage = 0;
     let baseTotalCoverage = 0;
     baseVector.forEach((value,key) => {
-        baseTotalCoverage += value;
-        const isCoveringKey = fromVector.get(key) ? 1 : 0;
-        fromCoverage += isCoveringKey * value;
+        if (typeof key === "string" && ! isNaN(value)) {
+            baseTotalCoverage += value;
+            const isCoveringKey = fromVector.get(key) ? 1 : 0;
+            fromCoverage += isCoveringKey * value;
+        }
     });
-    return fromCoverage / baseTotalCoverage;
+    if (baseTotalCoverage === 0) {
+        return 0;
+    } else {
+        return fromCoverage / baseTotalCoverage;
+    }
 }
 
 
