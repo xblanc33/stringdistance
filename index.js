@@ -1,7 +1,13 @@
 const TOKEN_DELIMITERS = /[^A-Z]/i;
+const BLACK_LIST = [
+    "should"
+]
 
 function tokenize(inputString) {
-    return inputString.split(TOKEN_DELIMITERS).filter((token)=>token != "").sort();
+    return inputString.split(TOKEN_DELIMITERS)
+    .filter((token)=>token != "")
+    .filter((token) => !BLACK_LIST.includes(token))
+    .sort();
 }
 
 function vectorize(inputString) {

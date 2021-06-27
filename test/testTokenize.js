@@ -27,4 +27,10 @@ describe('Tokenize()', function () {
     assert.strictEqual(tokens[2], "b");
     assert.strictEqual(tokens[3], "describe");
   });
+  it('should remove words that are in the blacklist ', function () {
+    let tokens = tokenize("a should");
+    assert.strictEqual(tokens.length, 1);
+    assert.strictEqual(tokens[0], "a");
+  });
+  
 });
