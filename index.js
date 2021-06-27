@@ -1,5 +1,6 @@
 //const TOKEN_DELIMITERS = /[^A-Z]/i;
 const TOKEN_DELIMITERS = /[^A-Za-zÀ-ÖØ-öø-ÿ]/;
+const MINIMUM_TOKEN_LENGHT = 0;
 const BLACK_LIST = [
     "should"
 ]
@@ -7,6 +8,7 @@ const BLACK_LIST = [
 function tokenize(inputString) {
     return inputString.split(TOKEN_DELIMITERS)
     .filter((token)=>token != "")
+    .filter((token) => token.length > MINIMUM_TOKEN_LENGHT)
     .map((token) => token.toLowerCase())
     .filter((token) => !BLACK_LIST.includes(token))
     .sort();
@@ -46,4 +48,17 @@ function asymetricDistance(fromVector, baseVector) {
     return Math.sqrt(sum);
 }
 
-module.exports = {tokenize, vectorize, asymetricDistance, addWeightedVectors};
+function asymetricCoverage(fromVector, baseVector) {
+    let fromCoverage = 0;
+    let baseTotalCoverage = 0;
+    baseVector.forEach((value,key) => {
+        baseTotalCoverage += value;
+        const isCoveringKey = fromVector.get(key) ? 1 : 0;
+        fromCoverage += isCoveringKey * value;
+    });
+    return fromCoverage / baseTotalCoverage;
+}
+
+
+
+module.exports = {tokenize, vectorize, asymetricDistance, addWeightedVectors, asymetricCoverage};
